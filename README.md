@@ -1,5 +1,7 @@
 # POC - Simple Shipments System
 
+![Diagram](https://raw.githubusercontent.com/andersonef/poc-shipments-main/main/.github/assets/diagram.png)
+
 This is a POC (Proof of Concept) which has the objective to be a simple CRUD using Next.js with node and react.
 This system has two pages:
 
@@ -12,3 +14,11 @@ On the backend we have:
 
  ## Submodules
  This project needs some submodules to work with. Each submodule is an independent microservice with their own database, stack and even infrastructure.
+
+ In this repository you'll get:
+  - Frontend
+  - Consolidation backend (app)
+  - Consolidation database (app)
+  - Rabbitmq container
+
+Submodules microservices:
