@@ -1,4 +1,5 @@
 up:
+	npm install
 	docker compose -f dev-docker-compose.yml build
 	docker compose -f dev-docker-compose.yml up -d
 	docker exec poc-entregas-main npx prisma generate
@@ -7,6 +8,7 @@ up:
 
 down:
 	docker compose -f dev-docker-compose.yml down
+	docker compose -f dev-docker-compose.yml rm
 
 bash:
 	docker exec -it poc-entregas-main bash

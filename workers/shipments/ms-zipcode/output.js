@@ -1,23 +1,32 @@
-const { PrismaClient } = require('@prisma/client')
-const consumer = require('../../lib/consumer.js')
-const prisma = new PrismaClient()
-const exchange = 'events__ms_zipcode_output'
+const { PrismaClient } = require("@prisma/client");
+const consumer = require("../../lib/consumer");
 
-consumer(exchange, async (channel, msg) => {
+const inputExchange = 'events__ms_zipcode_output'
+const inputQueue = 'events_shipment_updated'
+
+require('dotenv').config()
+const prisma = new PrismaClient()
+
+consumer(inputExchange, inputQueue, async (channel, msg) => {
     try {
         const data = JSON.parse(msg.content.toString())
-        await prisma.shipment.update({
-            where: { zipDestination: updatedShipment.zipCode },
-            update: {
-                streetName: data.streetName,
-                cityName: data.cityName,
+        await prisma.shipment.updateMany({
+            where: { 
+                zipDestination: {
+                    equals: data.cep 
+                }
+            },
+            data: {
+                streetName: data.street,
+                cityName: data.city,
                 state: data.state,
                 neighborhood: data.neighborhood
             }
         })
-        console.log('[mszipcode-consumed]: Shipments updated')
+        console.log('[mszipcode-consumed]: Shipments updated', data)
         channel.ack(msg)
     } catch (e) {
+        console.log('Erro', e)
         channel.nack(msg)
     }
 })

@@ -73,6 +73,7 @@ export default function Create({ vias }) {
                     <label className="form-label">Zip Destination</label>
                     <input 
                         type='text' 
+                        maxLength={10}
                         className="form-control"
                         value={zipDestination}
                         onChange={updateZip}
