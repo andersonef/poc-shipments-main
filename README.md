@@ -32,7 +32,7 @@ In order to run this project on your environment, it will be needed to have inst
 This is a simple system which allows you to register symbolic shipments and see them in a list on index page. 
 The main app will have a frontend with a list and a form to register, an endpoint to list shipments from database and another endpoint to save a shipment into database after user submit the register form.
 
-The differencial here is: You'll inside the main service a Shipment table with 12 fields, but you'll manually fill only 4 of them: Via, Zip destination, volumes and shipment cost.
+The differencial here is: You'll have inside the main service a Shipment table with 12 fields, but you'll manually fill only 4 of them: Via, Zip destination, volumes and shipment cost.
 
 So, after you fill those fields, an event will be fired and the other 2 microservices will be listening to it, so each one of them will know when a shipment was created and they will do their logic. 
 
