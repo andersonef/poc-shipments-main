@@ -14,6 +14,35 @@ services:
       - pocNetwork
     depends_on:
       - db
+    command: npm run dev
+  
+  worker-msaggr-output:
+    container_name: worker-msaggr-output
+    build:
+      context: .
+      dockerfile: DevDockerfile
+    volumes:
+      - ".:/app"
+    networks:
+      - pocNetwork
+    depends_on:
+      - app
+      - rabbit
+    command: npm run worker-ms-aggr
+
+  worker-mszipcode-output:
+    container_name: worker-zipcode-output
+    build:
+      context: .
+      dockerfile: DevDockerfile
+    volumes:
+      - ".:/app"
+    networks:
+      - pocNetwork
+    depends_on:
+      - app
+      - rabbit
+    command: npm run worker-ms-zipcode
 
   rabbit:
     image: rabbitmq:3-management
